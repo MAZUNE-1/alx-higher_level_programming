@@ -1,53 +1,25 @@
+#ifndef LISTS_H
+#define LISTS_H
+
 #include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "../lists.h"
 
 /**
- * main - check the code for Holberton School students.
+ * struct listint_s - singly linked list
+ * @n: integer
+ * @next: points to the next node
  *
- * Return: Always 0.
+ * Description: singly linked list node structure
+ * for Holberton project
  */
-int main(void)
+typedef struct listint_s
 {
-	listint_t *head;
-	listint_t *current;
-	listint_t *temp;
-	int i;
+	int n;
+	struct listint_s *next;
+} listint_t;
 
-	head = NULL;
-	add_nodeint(&head, 0);
-	add_nodeint(&head, 1);
-	add_nodeint(&head, 2);
-	add_nodeint(&head, 3);
-	add_nodeint(&head, 4);
-	add_nodeint(&head, 98);
-	add_nodeint(&head, 402);
-	add_nodeint(&head, 1024);
-	print_listint(head);
+size_t print_listint(const listint_t *h);
+listint_t *add_nodeint(listint_t **head, const int n);
+void free_listint(listint_t *head);
+int check_cycle(listint_t *list);
 
-	if (check_cycle(head) == 0)
-		printf("Linked list has no cycle\n");
-	else if (check_cycle(head) == 1)
-		printf("Linked list has a cycle\n");
-
-	current = head;
-	for (i = 0; i < 4; i++)
-		current = current->next;
-	temp = current->next;
-	current->next = head;
-
-	if (check_cycle(head) == 0)
-		printf("Linked list has no cycle\n");
-	else if (check_cycle(head) == 1)
-		printf("Linked list has a cycle\n");
-
-	current = head;
-	for (i = 0; i < 4; i++)
-		current = current->next;
-	current->next = temp;
-
-	free_listint(head);
-
-	return (0);
-}
+#endif /* LISTS_H */
